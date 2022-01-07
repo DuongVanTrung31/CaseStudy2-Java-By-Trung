@@ -1,6 +1,6 @@
 package _Service_Manager;
 
-import _IO_File.IOFile;
+import _IO_File.IOFileBinary;
 import _Model_Product.Product;
 import _Model_Product.Tablet;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class TabletManager implements IManager<Tablet> {
     private ArrayList<Tablet> listTablet;
-    private IOFile<Tablet> ioTable = new IOFile<>();
+    private IOFileBinary<Tablet> ioTable = new IOFileBinary<>();
     private final String PATH_OF_TABLET = "FileData/tablet";
 
     public TabletManager() {

@@ -1,7 +1,7 @@
 package _Service_Manager;
 
 import _Crawls_Data._List_Data_TGDĐ.ListProduct;
-import _IO_File.IOFile;
+import _IO_File.IOFileBinary;
 
 import _Model_Product.Product;
 import java.io.File;
@@ -12,23 +12,23 @@ import java.util.regex.Pattern;
 
 public class ProductManager implements IManager<Product>{
     private ArrayList<Product> productArrayList;
-    private IOFile<Product> ioFileProduct = new IOFile<>();
+    private IOFileBinary<Product> ioFileBinaryProduct = new IOFileBinary<>();
     private final String PATH_OF_PRODUCT = "FileData/product";
 
     public ProductManager() {
         if(new File(PATH_OF_PRODUCT).length() == 0) {
             productArrayList = new ArrayList<>();
         } else {
-            productArrayList = ioFileProduct.readFileData(PATH_OF_PRODUCT);
+            productArrayList = ioFileBinaryProduct.readFileData(PATH_OF_PRODUCT);
         }
     }
 
     public void setDataCrawls() {
         ListProduct listProduct = new ListProduct();
-        productArrayList.addAll(listProduct.getListLaptop());
-        productArrayList.addAll(listProduct.getListTablet());
-        productArrayList.addAll(listProduct.getListSmartphone());
-        ioFileProduct.writerFileData(productArrayList,PATH_OF_PRODUCT);
+        productArrayList.addAll(listProduct.setListLaptop());
+        productArrayList.addAll(listProduct.setListTablet());
+        productArrayList.addAll(listProduct.setListSmartphone());
+        ioFileBinaryProduct.writerFileData(productArrayList,PATH_OF_PRODUCT);
     }
 
     public ArrayList<Product> getProductArrayList() {
@@ -37,7 +37,7 @@ public class ProductManager implements IManager<Product>{
 
     @Override
     public void display() {
-        productArrayList = ioFileProduct.readFileData(PATH_OF_PRODUCT);
+        productArrayList = ioFileBinaryProduct.readFileData(PATH_OF_PRODUCT);
         if(productArrayList.isEmpty()){
             System.out.println("\t\tChưa có sản phẩm nào");
         } else {
@@ -48,19 +48,19 @@ public class ProductManager implements IManager<Product>{
     @Override
     public void delete(int id) {
         productArrayList.removeIf(p -> p.getId() == id);
-        ioFileProduct.writerFileData(productArrayList,PATH_OF_PRODUCT);
+        ioFileBinaryProduct.writerFileData(productArrayList,PATH_OF_PRODUCT);
     }
 
     @Override
     public void deleteAll() {
         productArrayList.clear();
-        ioFileProduct.writerFileData(productArrayList,PATH_OF_PRODUCT);
+        ioFileBinaryProduct.writerFileData(productArrayList,PATH_OF_PRODUCT);
     }
 
     @Override
     public void add(Product product) {
         productArrayList.add(product);
-        ioFileProduct.writerFileData(productArrayList,PATH_OF_PRODUCT);
+        ioFileBinaryProduct.writerFileData(productArrayList,PATH_OF_PRODUCT);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class ProductManager implements IManager<Product>{
                 p.setName(editName);
             }
         }
-        ioFileProduct.writerFileData(productArrayList,PATH_OF_PRODUCT);
+        ioFileBinaryProduct.writerFileData(productArrayList,PATH_OF_PRODUCT);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class ProductManager implements IManager<Product>{
                 p.setPrice(price);
             }
         }
-        ioFileProduct.writerFileData(productArrayList,PATH_OF_PRODUCT);
+        ioFileBinaryProduct.writerFileData(productArrayList,PATH_OF_PRODUCT);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class ProductManager implements IManager<Product>{
                 p.setBrand(brand);
             }
         }
-        ioFileProduct.writerFileData(productArrayList,PATH_OF_PRODUCT);
+        ioFileBinaryProduct.writerFileData(productArrayList,PATH_OF_PRODUCT);
     }
 
 

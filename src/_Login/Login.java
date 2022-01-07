@@ -25,9 +25,8 @@ public class Login {
         try{
             menuLogin();
         } catch (Exception e){
-            System.out.println();
             System.out.println("[❌] Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
-            System.out.println("---------------------------------------------");
+            System.out.println("---------------------------------------------------");
             loginSystem();
         }
     }
@@ -41,7 +40,7 @@ public class Login {
             System.out.println("║>[2]. Đăng ký tài khoản                     ║");
             System.out.println("║>[0]. Thoát                                 ║");
             System.out.println("╚============================================╝");
-            System.out.println("[\uD83D\uDC4B] Nhập lựa chọn: ");
+            System.out.print("[\uD83D\uDC4B] Nhập lựa chọn: ");
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1:
@@ -73,17 +72,15 @@ public class Login {
     public void checkAccount(String account, String password) {
         try {
             if (checkLoginAccountAdmin(account, password)) {
-                System.out.println();
                 System.out.println("[\uD83D\uDD13] Đặng nhập hệ thống bởi ADMIN thành công !!!");
-                System.out.println("--------------------");
+                System.out.println("------------------------------------------------------------");
                 runByAdmin.menuProductOfAdmin();
             } else {
                 loginAccountUser(account, password);
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println();
             System.out.println("[❌] Đăng nhập thất bại. Vui lòng đăng nhập lại !!!");
-            System.out.println("--------------------");
+            System.out.println("-------------------------------------------------------");
             loginSystem();
         }
     }
@@ -100,14 +97,12 @@ public class Login {
 
     public void loginAccountUser(String account, String password) {
         if (checkLoginAccountUser(account, password)) {
-            System.out.println();
             System.out.println("[\uD83D\uDD13] Đăng nhập hệ thống bởi USER thành công !!!");
-            System.out.println("--------------------");
+            System.out.println("----------------------------------------------------------");
             runByUser.menuProductOfUser();
         } else {
-            System.out.println();
             System.out.println("[❌] Tài khoản USER chưa tồn tại. Vui lòng kiểm tra lại !!!");
-            System.out.println("--------------------");
+            System.out.println("------------------------------------------------------------");
             loginSystem();
         }
     }
@@ -125,7 +120,7 @@ public class Login {
     public void registerAccountUser() throws InputMismatchException {
         System.out.println("┎──────────────[ĐĂNG KÝ]──────────────┒");
         System.out.println("[\uD83D\uDD11] Mời bạn nhập thông tin:");
-        System.out.println("--------------------");
+        System.out.println("--------------------------------------");
         String accountUser = registerAccountName();
         String passwordUser = registerPassword();
         System.out.print("┠ ▹ Nhập tên: ");
@@ -146,7 +141,7 @@ public class Login {
             if (!validate.validateAccount(account)) {
                 System.out.println("[❌] Tài khoản không hợp lệ !!!");
                 System.out.println(">[Chú ý]: Tài khoản phải từ 8 - 12 ký tự (a,1,...)");
-                System.out.println("--------------------");
+                System.out.println("---------------------------------------------------");
             } else {
                 accountUser = account;
                 break;
@@ -163,7 +158,7 @@ public class Login {
             if (!validate.validatePassword(password)) {
                 System.out.println("[❌] Mật khẩu không hợp lệ !!!");
                 System.out.println(">[Chú ý]: Mật khẩu phải từ 8 - 16 ký tự (a,A,1,...) bao gồm 1 ký tự đặc biệt");
-                System.out.println("--------------------");
+                System.out.println("-----------------------------------------");
             } else {
                 passwordUser = password;
                 break;
@@ -180,7 +175,7 @@ public class Login {
             if (!validate.validatePhone(phone)) {
                 System.out.println("[❌] Số điện thoại không hợp lệ !!!");
                 System.out.println(">[Chú ý]: Số điện thoại phải có 10 số (0 - 9) định dạng: (+84)-911112222");
-                System.out.println("--------------------");
+                System.out.println("------------------------------------------");
             } else {
                 phoneNumber = phone;
                 break;
@@ -197,7 +192,7 @@ public class Login {
             if (!validate.validateEmail(inputEmail)) {
                 System.out.println("[❌] Email không hợp lệ !!!");
                 System.out.println(">[Chú ý]: Email phải có dạng: abc@yahoo.com/ Xyz.a@gmail.vn/...");
-                System.out.println("--------------------");
+                System.out.println("--------------------------------------------");
             } else {
                 email = inputEmail;
                 break;
@@ -208,16 +203,13 @@ public class Login {
 
     public void checkAccountUser(String accountUser, String passwordUser, String name, String address, String phoneNumber, String email) {
         if (checkNameAccount(accountUser)) {
-            System.out.println();
             System.out.println("[❌] Tài khoản đã tồn tại. Vui lòng đăng ký lại !!!");
-            System.out.println("--------------------");
-            System.out.println();
+            System.out.println("---------------------------------------");
         } else {
             userManager.addUser(new User(name,phoneNumber,address,email));
             accountUserManager.addAccount(new AccountUser(accountUser,passwordUser));
-            System.out.println();
             System.out.println("[\uD83D\uDC4C] Đăng ký thành công. Mời đăng nhập vào hệ thống !!!");
-            System.out.println("--------------------");
+            System.out.println("----------------------------------------");
             System.out.println();
         }
         loginSystem();

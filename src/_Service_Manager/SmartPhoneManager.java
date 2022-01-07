@@ -1,6 +1,6 @@
 package _Service_Manager;
 
-import _IO_File.IOFile;
+import _IO_File.IOFileBinary;
 import _Model_Product.Product;
 import _Model_Product.SmartPhone;
 
@@ -9,14 +9,14 @@ import java.util.ArrayList;
 
 public class SmartPhoneManager implements IManager<SmartPhone>{
     private ArrayList<SmartPhone> listSmartPhone;
-    private IOFile<SmartPhone> phoneIOFile = new IOFile<>();
+    private IOFileBinary<SmartPhone> phoneIOFileBinary = new IOFileBinary<>();
     private final String PATH_OF_SMARTPHONE = "FileData/smartphone";
 
     public SmartPhoneManager() {
         if(new File(PATH_OF_SMARTPHONE).length() == 0) {
             listSmartPhone = new ArrayList<>();
         } else {
-            listSmartPhone = phoneIOFile.readFileData(PATH_OF_SMARTPHONE);
+            listSmartPhone = phoneIOFileBinary.readFileData(PATH_OF_SMARTPHONE);
         }
     }
 
@@ -26,7 +26,7 @@ public class SmartPhoneManager implements IManager<SmartPhone>{
 
     @Override
     public void display() {
-        listSmartPhone = phoneIOFile.readFileData(PATH_OF_SMARTPHONE);
+        listSmartPhone = phoneIOFileBinary.readFileData(PATH_OF_SMARTPHONE);
         if(listSmartPhone.isEmpty()) {
             System.err.println("\t\tChưa có sản phẩm nào");
         } else {
@@ -37,19 +37,19 @@ public class SmartPhoneManager implements IManager<SmartPhone>{
     @Override
     public void delete(int id) {
         listSmartPhone.removeIf(p -> p.getId() == id);
-        phoneIOFile.writerFileData(listSmartPhone,PATH_OF_SMARTPHONE);
+        phoneIOFileBinary.writerFileData(listSmartPhone,PATH_OF_SMARTPHONE);
     }
 
     @Override
     public void deleteAll() {
         listSmartPhone.clear();
-        phoneIOFile.writerFileData(listSmartPhone,PATH_OF_SMARTPHONE);
+        phoneIOFileBinary.writerFileData(listSmartPhone,PATH_OF_SMARTPHONE);
     }
 
     @Override
     public void add(SmartPhone smartPhone) {
         listSmartPhone.add(smartPhone);
-        phoneIOFile.writerFileData(listSmartPhone,PATH_OF_SMARTPHONE);
+        phoneIOFileBinary.writerFileData(listSmartPhone,PATH_OF_SMARTPHONE);
     }
 
     public void editName(int id, String editName) {
@@ -58,7 +58,7 @@ public class SmartPhoneManager implements IManager<SmartPhone>{
                 p.setName(editName);
             }
         }
-        phoneIOFile.writerFileData(listSmartPhone,PATH_OF_SMARTPHONE);
+        phoneIOFileBinary.writerFileData(listSmartPhone,PATH_OF_SMARTPHONE);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class SmartPhoneManager implements IManager<SmartPhone>{
                 p.setPrice(price);
             }
         }
-        phoneIOFile.writerFileData(listSmartPhone,PATH_OF_SMARTPHONE);
+        phoneIOFileBinary.writerFileData(listSmartPhone,PATH_OF_SMARTPHONE);
     }
 
     @Override
@@ -78,6 +78,6 @@ public class SmartPhoneManager implements IManager<SmartPhone>{
                 p.setBrand(brand);
             }
         }
-        phoneIOFile.writerFileData(listSmartPhone,PATH_OF_SMARTPHONE);
+        phoneIOFileBinary.writerFileData(listSmartPhone,PATH_OF_SMARTPHONE);
     }
 }

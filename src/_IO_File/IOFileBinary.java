@@ -3,7 +3,7 @@ package _IO_File;
 import java.io.*;
 import java.util.ArrayList;
 
-public class IOFile<E> {
+public class IOFileBinary<E> {
     public void writerFileData(ArrayList<E> arrayData, String pathname) {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(new File(pathname)));

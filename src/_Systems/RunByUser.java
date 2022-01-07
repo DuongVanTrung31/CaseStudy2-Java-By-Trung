@@ -31,7 +31,7 @@ public class RunByUser {
                 System.out.println("║>[6]. Thanh toán                                            ║");
                 System.out.println("║>[0]. Đăng xuất                                             ║");
                 System.out.println("╚============================================================╝");
-                System.out.println("[\uD83D\uDC4B] Mời bạn nhập lựa chọn:");
+                System.out.print("[\uD83D\uDC4B] Mời bạn nhập lựa chọn: ");
                 int choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
@@ -54,7 +54,7 @@ public class RunByUser {
                         break;
                     case 0:
                         System.out.println("[\uD83D\uDD10] Đã thoát khỏi hệ thống USER !!!");
-                        System.out.println("--------------------");
+                        System.out.println("----------------------------------------------------");
                         new Login().loginSystem();
                         break;
                     default:
@@ -63,9 +63,8 @@ public class RunByUser {
                 }
             } while (true);
         } catch (Exception e) {
-            System.out.println();
             System.out.println("[❌] Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
-            System.out.println("---------------------------------------------");
+            System.out.println("---------------------------------------------------");
             menuProductOfUser();
         }
     }
@@ -79,20 +78,19 @@ public class RunByUser {
             System.out.println("║>[2]. Theo khoảng giá                       ║");
             System.out.println("║>[0]. Thoát                                 ║");
             System.out.println("╚============================================╝");
-            System.out.println("[\uD83D\uDD0E] Mời bạn nhập vào lựa chọn: ");
+            System.out.print("[\uD83D\uDD0E] Mời bạn nhập vào lựa chọn: ");
             int choiceAdd = Integer.parseInt(scanner.nextLine());
             productFacade.searching(choiceAdd);
         } catch (InputMismatchException e) {
-            System.out.println();
             System.out.println("[❌] Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
-            System.out.println("---------------------------------------------");
+            System.out.println("----------------------------------------------------");
             search();
         }
     }
 
     public void addProductToCart() {
         try {
-            System.out.println("[\uD83D\uDD0E] Nhập mã sản phẩm bỏ vào giỏ");
+            System.out.print("[\uD83D\uDD0E] Nhập mã sản phẩm bỏ vào giỏ: ");
             int id = Integer.parseInt(scanner.nextLine());
             Product product = productFacade.findProductById(id);
             if (product == null) {
@@ -102,9 +100,8 @@ public class RunByUser {
                 System.out.println("[\uD83D\uDC4C] Đã thêm sản phẩm vào giỏ hàng");
             }
         } catch (InputMismatchException e) {
-            System.out.println();
             System.out.println("[❌] Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
-            System.out.println("---------------------------------------------");
+            System.out.println("---------------------------------------------------");
             addProductToCart();
         }
     }
@@ -114,7 +111,7 @@ public class RunByUser {
             if (cartUser.isEmpty()) {
                 System.out.println("[❌] Giỏ hàng trống rỗng");
             } else {
-                System.out.println("[\uD83D\uDD0E] Nhập mã sản phẩm muốn xóa khỏi giỏ hàng");
+                System.out.print("[\uD83D\uDD0E] Nhập mã sản phẩm muốn xóa khỏi giỏ hàng: ");
                 int idRemove = Integer.parseInt(scanner.nextLine());
                 boolean check = cartUser.removeIf(p -> p.getId() == idRemove);
                 if (!check) {
@@ -124,9 +121,8 @@ public class RunByUser {
                 }
             }
         } catch (InputMismatchException e) {
-            System.out.println();
             System.out.println("[❌] Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
-            System.out.println("---------------------------------------------");
+            System.out.println("-----------------------------------------------------");
             addProductToCart();
         }
     }
@@ -143,15 +139,15 @@ public class RunByUser {
     }
 
     public void payment() {
-        System.out.println("[\uD83D\uDCB0] Tổng giá tiền các sản phẩm trong giỏ hàng là: " + getTotalPrice() + " VND");
-        System.out.println("[\uD83C\uDF81] Xác nhân thanh toán (Y/N)");
+        System.out.printf("%-20s%-15.0f%3S\n","[\uD83D\uDCB0] Tổng giá tiền các sản phẩm trong giỏ hàng là: ",getTotalPrice(),"VND");
+        System.out.print("[\uD83C\uDF81] Xác nhân thanh toán (Y/N)");
         String result = scanner.nextLine();
         if (result.equalsIgnoreCase("Y")) {
             for (Product p : cartUser) {
                 productFacade.delete(p.getId());
             }
             cartUser.clear();
-            System.out.println("[\uD83D\uDC4C] Thanh toán hoàn tất! Xin trân trọng cảm ơn!!\uD83C\uDF81 \uD83D\uDC97 \uD83D\uDC97");
+            System.out.println("[\uD83D\uDC4C] Thanh toán hoàn tất! Xin trân trọng cảm ơn quý khách đã mua sản phẩm!!\uD83C\uDF81 \uD83D\uDC97 \uD83D\uDC97");
         } else {
             System.out.println("[❌] Bạn cần thanh toán hóa đơn để có sản phẩm");
         }
@@ -165,4 +161,5 @@ public class RunByUser {
         }
         return totalPrice;
     }
+
 }

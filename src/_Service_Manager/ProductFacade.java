@@ -34,11 +34,11 @@ public class ProductFacade {
         switch (choiceAdd) {
             case 1:
                 Laptop laptop = new Laptop(id, price, name, brand);
-                System.out.println("Có thêm chi tiết cấu hình không ? (Y/N)");
+                System.out.print("[\uD83D\uDCBB] Có thêm chi tiết cấu hình không ? (Y/N): ");
                 if (scanner.nextLine().equalsIgnoreCase("Y")) {
-                    System.out.println("Thêm thông số Ram - SSD");
+                    System.out.print("[\uD83D\uDCBB] Thêm thông số Ram - SSD: ");
                     String ramSSD = scanner.nextLine();
-                    System.out.println("Thêm mô tả chi tiết VD: M.Hình, CPU, GPU , Pin");
+                    System.out.print("[\uD83D\uDCBB] Thêm mô tả chi tiết VD: M.Hình, CPU, GPU , Pin: ");
                     String description = scanner.nextLine();
                     laptop.setRamSSD(ramSSD);
                     laptop.setDescription(description);
@@ -109,7 +109,7 @@ public class ProductFacade {
     public void searching(int choiceAdd) {
         switch (choiceAdd) {
             case 1:
-                System.out.println("[\uD83D\uDD0E] Nhập từ khóa tìm kiếm");
+                System.out.print("[\uD83D\uDD0E] Nhập từ khóa tìm kiếm: ");
                 String brand = scanner.nextLine();
                 ArrayList<Product> listByBrand = productManager.findProductByBrand(brand);
                 if (listByBrand.isEmpty()) {
@@ -123,13 +123,13 @@ public class ProductFacade {
                 }
                 break;
             case 2:
-                System.out.println("Nhập khoảng giá từ: ");
+                System.out.print("Nhập khoảng giá từ: ");
                 double lowPrice = Double.parseDouble(scanner.nextLine());
-                System.out.println("Nhập khoảng giá đến: ");
+                System.out.print("Nhập khoảng giá đến: ");
                 double highPrice = Double.parseDouble(scanner.nextLine());
                 if (lowPrice > highPrice) {
                     System.out.println("[❌] Nhập sai khoảng giá");
-                    System.out.println("------------------");
+                    System.out.println("-----------------------------------------------");
                     return;
                 }
                 ArrayList<Product> listByPrice = productManager.productSearchByPrice(lowPrice, highPrice);
@@ -154,7 +154,7 @@ public class ProductFacade {
     public void edit(int id, int choiceAdd) {
         switch (choiceAdd) {
             case 1:
-                System.out.println("Nhập tên mới: ");
+                System.out.print("Nhập tên mới: ");
                 String namNew = scanner.nextLine();
                 productManager.editName(id, namNew);
                 laptopManager.editName(id, namNew);
@@ -162,7 +162,7 @@ public class ProductFacade {
                 tabletManager.editName(id, namNew);
                 break;
             case 2:
-                System.out.println("Nhập giá mới: ");
+                System.out.print("Nhập giá mới: ");
                 double priceNew = Double.parseDouble(scanner.nextLine());
                 productManager.editPrice(id, priceNew);
                 laptopManager.editPrice(id, priceNew);
@@ -170,7 +170,7 @@ public class ProductFacade {
                 tabletManager.editPrice(id, priceNew);
                 break;
             case 3:
-                System.out.println("Nhập hãng mới: ");
+                System.out.print("Nhập hãng mới: ");
                 String brandNew = scanner.nextLine();
                 productManager.editBrand(id, brandNew);
                 laptopManager.editBrand(id, brandNew);
@@ -196,7 +196,8 @@ public class ProductFacade {
 
     public void backUpData() {
         productManager.setDataCrawls();
-        System.out.println("[\uD83D\uDCBE] Khôi phục dữ liệu từ TGDĐ thành công [\uD83D\uDCBE]");
+        System.err.println("[\uD83D\uDCBE] Khôi phục dữ liệu từ TGDĐ thành công [\uD83D\uDCBE]");
+        System.out.println("-----------------------------------------------------------------");
     }
 
     public Product findProductById(int id){

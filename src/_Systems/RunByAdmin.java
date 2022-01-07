@@ -30,7 +30,7 @@ public class RunByAdmin {
                 System.out.println("║>[6]. Khôi phục dữ liệu                                     ║");
                 System.out.println("║>[0]. Đăng xuất                                             ║");
                 System.out.println("╚============================================================╝");
-                System.out.println("[\uD83D\uDC4B] Mời bạn nhập lựa chọn:");
+                System.out.print("[\uD83D\uDC4B] Mời bạn nhập lựa chọn: ");
                 int choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
@@ -38,17 +38,18 @@ public class RunByAdmin {
                         break;
                     case 2:
                         try{
-                            System.out.println("[\uD83D\uDD0E] Nhập mã ID sản phẩm muốn sửa");
+                            System.out.print("[\uD83D\uDD0E] Nhập mã ID sản phẩm muốn sửa: ");
                             int id = Integer.parseInt(scanner.nextLine());
                             if (productFacade.checkID(id)) {
                                 editProduct(id);
                                 System.out.println("[\uD83D\uDC4C] Đã cập nhật thông tin sản phẩm");
                             } else {
                                 System.out.println("[❌] Không có mã ID trên");
-                                System.out.println("----------------------");
+                                System.out.println("---------------------------------------------------");
                             }
                         } catch (InputMismatchException e) {
                             System.out.println("[❌] Sai kiểu dữ liệu");
+                            System.out.println("---------------------------------------------------");
                         }
                         break;
                     case 3:
@@ -66,7 +67,7 @@ public class RunByAdmin {
                         break;
                     case 0:
                         System.out.println("[\uD83D\uDD10] Đã thoát khỏi hệ thống ADMIN !!!");
-                        System.out.println("--------------------");
+                        System.out.println("-----------------------------------------------------");
                         new Login().loginSystem();
                         break;
                     default:
@@ -75,9 +76,8 @@ public class RunByAdmin {
                 }
             } while (true);
         } catch (Exception e) {
-            System.out.println();
             System.out.println("[❌] Bạn nhập sai dữ liệu, mời nhập lại !!!");
-            System.out.println("--------------------");
+            System.out.println("--------------------------------------------------------");
             menuProductOfAdmin();
         }
     }
@@ -93,7 +93,7 @@ public class RunByAdmin {
                 System.out.println("║>[3]. Tablet                               ║");
                 System.out.println("║>[0]. Thoát                                ║");
                 System.out.println("╚===========================================╝");
-                System.out.println("[\uD83D\uDC4B] Mời bạn nhập vào lựa chọn: ");
+                System.out.print("[\uD83D\uDC4B] Mời bạn nhập vào lựa chọn: ");
                 int choiceAdd = Integer.parseInt(scanner.nextLine());
                 if (choiceAdd == 0 ){
                     break;
@@ -101,28 +101,26 @@ public class RunByAdmin {
                     System.out.println("[❌] Sai lựa chọn! Thử lại");
                     menuAddProduct();
                 }
-                System.out.println("Nhập mã ID sản phẩm");
+                System.out.print("Nhập mã ID sản phẩm: ");
                 int id = Integer.parseInt(scanner.nextLine());
-                System.out.println("Nhập giá sản phẩm");
+                System.out.print("Nhập giá sản phẩm: ");
                 double price = Double.parseDouble(scanner.nextLine());
-                System.out.println("Nhập tên sản phẩm");
+                System.out.print("Nhập tên sản phẩm: ");
                 String name = scanner.nextLine();
-                System.out.println("Nhập hãng sản phẩm");
+                System.out.print("Nhập hãng sản phẩm: ");
                 String brand = scanner.nextLine();
                 if (!productFacade.checkID(id)) {
                     productFacade.add(id, price, name, brand, choiceAdd);
                     System.out.println("[\uD83D\uDC4C] Thêm sản phẩm thành công");
                 } else {
-                    System.out.println();
                     System.out.println("[❌] Sản phẩm đã trùng mã ID");
-                    System.out.println("----------------------------------------");
+                    System.out.println("------------------------------------------");
                 }
                 break;
             } while (true);
         } catch (InputMismatchException e) {
-            System.out.println();
             System.out.println("[❌] Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
-            System.out.println("--------------------------------------");
+            System.out.println("----------------------------------------------------");
             menuAddProduct();
         }
     }
@@ -137,13 +135,12 @@ public class RunByAdmin {
             System.out.println("║>[3]. Sửa hãng                             ║");
             System.out.println("║>[0]. Thoát                                ║");
             System.out.println("╚===========================================╝");
-            System.out.println("[\uD83D\uDC4B] Mời bạn nhập vào lựa chọn: ");
+            System.out.print("[\uD83D\uDC4B] Mời bạn nhập vào lựa chọn: ");
             int choiceAdd = Integer.parseInt(scanner.nextLine());
             productFacade.edit(id, choiceAdd);
         } catch (InputMismatchException e) {
-            System.out.println();
             System.out.println("[❌] Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
-            System.out.println("-------------------------------------------");
+            System.out.println("---------------------------------------------------------");
             editProduct(id);
         }
     }
@@ -157,28 +154,28 @@ public class RunByAdmin {
             System.out.println("║>[2]. Xóa tất cả sản phẩm                  ║");
             System.out.println("║>[0]. Thoát                                ║");
             System.out.println("╚===========================================╝");
-            System.out.println("[\uD83D\uDC4B] Mời bạn nhập vào lựa chọn: ");
+            System.out.print("[\uD83D\uDC4B] Mời bạn nhập vào lựa chọn: ");
             int choiceAdd = Integer.parseInt(scanner.nextLine());
             switch (choiceAdd) {
                 case 1:
-                    System.out.println("[\uD83D\uDD0E] Nhập mã ID");
+                    System.out.print("[\uD83D\uDD0E] Nhập mã ID: ");
                     int id = Integer.parseInt(scanner.nextLine());
                     if (productFacade.checkID(id)) {
                         productFacade.delete(id);
                         System.out.println("[\uD83D\uDC4C] Xóa thành công");
-                        System.out.println("-------------------");
+                        System.out.println("--------------------------------------");
                     } else {
                         System.out.println("[❌] Không có mã ID trên");
-                        System.out.println("-------------------");
+                        System.out.println("---------------------------------------");
                     }
                     break;
                 case 2:
-                    System.err.println("⛔ \uD83D\uDEA7 Bạn chắn chắc muốn xóa hết dữ liệu (Y/N) ❓ \uD83D\uDEA7 ⛔");
+                    System.err.print("⛔ \uD83D\uDEA7 Bạn chắn chắc muốn xóa hết dữ liệu (Y/N)❓ \uD83D\uDEA7 ⛔: ");
                     String choice = scanner.nextLine();
                     if (choice.equalsIgnoreCase("Y")) {
                         productFacade.deleteAll();
                         System.out.println("[\uD83D\uDCBE] Đã xóa hết dữ liệu");
-                        System.out.println("--------------");
+                        System.out.println("-----------------------------------------------------");
                     } else {
                         break;
                     }
@@ -190,9 +187,8 @@ public class RunByAdmin {
                     break;
             }
         } catch (InputMismatchException e) {
-            System.out.println();
             System.out.println("[❌] Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
-            System.out.println("-------------------------------------------");
+            System.out.println("-----------------------------------------------------");
             deleteProduct();
         }
     }
@@ -208,13 +204,12 @@ public class RunByAdmin {
             System.out.println("║>[4]. Tablet                               ║");
             System.out.println("║>[0]. Thoát                                ║");
             System.out.println("╚===========================================╝");
-            System.out.println("[\uD83D\uDC4B] Mời bạn nhập vào lựa chọn: ");
+            System.out.print("[\uD83D\uDC4B] Mời bạn nhập vào lựa chọn: ");
             int choiceAdd = Integer.parseInt(scanner.nextLine());
             productFacade.displayChoice(choiceAdd);
         } catch (InputMismatchException e) {
-            System.out.println();
             System.out.println("[❌] Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
-            System.out.println("---------------------------------------------");
+            System.out.println("----------------------------------------------------");
             display();
         }
     }
@@ -229,7 +224,7 @@ public class RunByAdmin {
             System.out.println("║>[3]. Xóa tài khoản khách hàng                    ║");
             System.out.println("║>[0]. Quay lại                                    ║");
             System.out.println("╚==================================================╝");
-            System.out.println("[\uD83D\uDC4B] Mời bạn nhập lựa chọn:");
+            System.out.print("[\uD83D\uDC4B] Mời bạn nhập lựa chọn: ");
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1:
@@ -239,7 +234,7 @@ public class RunByAdmin {
                     userInfo.displayUser();
                     break;
                 case 3:
-                    System.out.println("[\uD83D\uDD0E] Nhập tên tài khoản muốn xóa");
+                    System.out.print("[\uD83D\uDD0E] Nhập tên tài khoản muốn xóa: ");
                     String accountName = scanner.nextLine();
                     userAccounts.deleteAccount(accountName);
                     break;
@@ -251,9 +246,8 @@ public class RunByAdmin {
                     break;
             }
         } catch (InputMismatchException e) {
-            System.out.println();
             System.out.println("[❌] Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
-            System.out.println("---------------------------------------------");
+            System.out.println("-----------------------------------------------------");
             managerUser();
         }
     }
