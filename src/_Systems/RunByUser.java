@@ -111,7 +111,7 @@ public class RunByUser {
 
     public void removeProductFromCart() {
         try {
-            if(cartUser.isEmpty()){
+            if (cartUser.isEmpty()) {
                 System.out.println("[❌] Giỏ hàng trống rỗng");
             } else {
                 System.out.println("[\uD83D\uDD0E] Nhập mã sản phẩm muốn xóa khỏi giỏ hàng");
@@ -146,10 +146,11 @@ public class RunByUser {
         System.out.println("[\uD83D\uDCB0] Tổng giá tiền các sản phẩm trong giỏ hàng là: " + getTotalPrice() + " VND");
         System.out.println("[\uD83C\uDF81] Xác nhân thanh toán (Y/N)");
         String result = scanner.nextLine();
-        if(result.equalsIgnoreCase("Y")){
-            for (Product p: cartUser) {
+        if (result.equalsIgnoreCase("Y")) {
+            for (Product p : cartUser) {
                 productFacade.delete(p.getId());
             }
+            cartUser.clear();
             System.out.println("[\uD83D\uDC4C] Thanh toán hoàn tất! Xin trân trọng cảm ơn!!\uD83C\uDF81 \uD83D\uDC97 \uD83D\uDC97");
         } else {
             System.out.println("[❌] Bạn cần thanh toán hóa đơn để có sản phẩm");
@@ -159,8 +160,8 @@ public class RunByUser {
 
     public double getTotalPrice() {
         double totalPrice = 0;
-        while (cartUser.stream().iterator().hasNext()){
-            totalPrice += cartUser.stream().iterator().next().getPrice();
+        for (Product product : cartUser) {
+            totalPrice += product.getPrice();
         }
         return totalPrice;
     }
