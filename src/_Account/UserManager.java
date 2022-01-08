@@ -3,6 +3,7 @@ package _Account;
 import _IO_File.IOFileBinary;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class UserManager {
@@ -11,6 +12,13 @@ public class UserManager {
     private final String PATHNAME_OF_USER = "FileData/userinfor";
 
     public UserManager() {
+        if(!new File(PATHNAME_OF_USER).exists()){
+            try {
+                new File(PATHNAME_OF_USER).createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         if (new File(PATHNAME_OF_USER).length() == 0) {
             userList = new ArrayList<>();
         } else {

@@ -5,6 +5,7 @@ import _IO_File.IOFileBinary;
 
 import _Model_Product.Product;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.regex.Matcher;
@@ -16,6 +17,13 @@ public class ProductManager implements IManager<Product>{
     private final String PATH_OF_PRODUCT = "FileData/product";
 
     public ProductManager() {
+        if(!new File(PATH_OF_PRODUCT).exists()) {
+            try {
+                new File(PATH_OF_PRODUCT).createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         if(new File(PATH_OF_PRODUCT).length() == 0) {
             productArrayList = new ArrayList<>();
         } else {

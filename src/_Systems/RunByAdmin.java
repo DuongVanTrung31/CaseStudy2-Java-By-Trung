@@ -1,6 +1,7 @@
 package _Systems;
 
 import _Account.AccountUserManager;
+import _Account.UserHistory;
 import _Account.UserManager;
 import _Login.Login;
 import _Service_Manager.ProductFacade;
@@ -13,6 +14,7 @@ public class RunByAdmin {
     private final ProductFacade productFacade = ProductFacade.getInstance();
     private final UserManager userInfo = new UserManager();
     private final AccountUserManager userAccounts = new AccountUserManager();
+    private final UserHistory userHistory = new UserHistory();
     public RunByAdmin() {
     }
 
@@ -221,7 +223,8 @@ public class RunByAdmin {
             System.out.println("╠==================================================╣");
             System.out.println("║>[1]. Tài khoản người dùng                        ║");
             System.out.println("║>[2]. Thông tin cá nhân người dùng                ║");
-            System.out.println("║>[3]. Xóa tài khoản khách hàng                    ║");
+            System.out.println("║>[3]. Lịch sử giao dịch khách hàng                ║");
+            System.out.println("║>[4]. Xóa tài khoản khách hàng                    ║");
             System.out.println("║>[0]. Quay lại                                    ║");
             System.out.println("╚==================================================╝");
             System.out.print("[\uD83D\uDC4B] Mời bạn nhập lựa chọn: ");
@@ -234,6 +237,9 @@ public class RunByAdmin {
                     userInfo.displayUser();
                     break;
                 case 3:
+                    userHistory.showAllHistoryUser();
+                    break;
+                case 4:
                     System.out.print("[\uD83D\uDD0E] Nhập tên tài khoản muốn xóa: ");
                     String accountName = scanner.nextLine();
                     userAccounts.deleteAccount(accountName);

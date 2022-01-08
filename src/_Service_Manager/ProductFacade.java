@@ -70,6 +70,8 @@ public class ProductFacade {
             case 2:
                 System.err.printf("║    %-5s ║    %-7s ║      %-9s ║                                    %-70s ║\n", "ID", "Giá", "Hãng", "Tên sản phẩm");
                 laptopManager.display();
+                System.out.println("╚====================================================================================================================================================╝");
+
                 break;
             case 3:
                 System.err.printf("║    %-5s ║    %-7s ║      %-9s ║                                    %-70s ║\n", "ID", "Giá", "Hãng", "Tên sản phẩm");

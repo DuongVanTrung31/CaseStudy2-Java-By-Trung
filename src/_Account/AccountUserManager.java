@@ -3,6 +3,7 @@ package _Account;
 import _IO_File.IOFileBinary;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -12,6 +13,13 @@ public class AccountUserManager {
     private final String PATHNAME_OF_USER_ACCOUNT = "FileData/userAccount";
 
     public AccountUserManager() {
+        if(!new File(PATHNAME_OF_USER_ACCOUNT).exists()) {
+            try {
+                new File(PATHNAME_OF_USER_ACCOUNT).createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         if (new File(PATHNAME_OF_USER_ACCOUNT).length() == 0) {
             this.accountUsers = new ArrayList<>();
         } else {

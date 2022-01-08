@@ -2,10 +2,12 @@ package _Login;
 
 import _Account.*;
 
+import _Model_Product.Bill;
 import _Systems.RunByAdmin;
 import _Systems.RunByUser;
 import _Validate.Validate;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -17,6 +19,8 @@ public class Login {
     private AccountUserManager accountUserManager = new AccountUserManager();
     private UserManager userManager = new UserManager();
     private Validate validate = new Validate();
+    private UserHistory userHistory = new UserHistory();
+    public static String nameAccountUser;
 
     public Login() {
     }
@@ -111,6 +115,10 @@ public class Login {
         for (AccountUser accUser : accountUserManager.getUserAccounts()) {
             boolean checkAccountUser = account.equals(accUser.getAccount()) && password.equals(accUser.getPassword());
             if (checkAccountUser) {
+                nameAccountUser = account;
+                if(!userHistory.getHistoryList().containsKey(nameAccountUser)){
+                    userHistory.add(nameAccountUser,new ArrayList<>());
+                }
                 return true;
             }
         }
@@ -157,7 +165,7 @@ public class Login {
             String password = scanner.nextLine();
             if (!validate.validatePassword(password)) {
                 System.out.println("[❌] Mật khẩu không hợp lệ !!!");
-                System.out.println(">[Chú ý]: Mật khẩu phải từ 8 - 16 ký tự (a,A,1,...) bao gồm 1 ký tự đặc biệt");
+                System.out.println(">[Chú ý]: Mật khẩu phải từ 8 - 16 ký tự (a,A,1,...)hoặc ký tự đặc biệt");
                 System.out.println("-----------------------------------------");
             } else {
                 passwordUser = password;
