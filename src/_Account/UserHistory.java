@@ -4,6 +4,7 @@ package _Account;
 import _Model_Product.Bill;
 
 import java.io.*;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,7 @@ public class UserHistory {
     private final String PATH_NAME_HISTORY_BILL = "FileData/userHistoryBill";
 
     public UserHistory() {
-        if(!new File(PATH_NAME_HISTORY_BILL).exists()){
+        if (!new File(PATH_NAME_HISTORY_BILL).exists()) {
             try {
                 new File(PATH_NAME_HISTORY_BILL).createNewFile();
             } catch (IOException e) {
@@ -28,10 +29,12 @@ public class UserHistory {
     }
 
     public HashMap<String, ArrayList<Bill>> getHistoryList() {
-        if(historyList == null) {
+        if (historyList == null) {
             historyList = new HashMap<>();
+        } else {
+            historyList = readFileData();
         }
-        return historyList = readFileData();
+        return historyList;
     }
 
     public void add(String userName, ArrayList<Bill> bills) {
@@ -42,16 +45,52 @@ public class UserHistory {
     public void showHistory(String accountName) {
         historyList = getHistoryList();
         for (Bill b : historyList.get(accountName)) {
-            System.out.println(b);
+            b.display();
         }
+    }
+
+    public double getTotalPriceByUser(String accountName) {
+        historyList = getHistoryList();
+        double totalPriceUser = 0;
+        for (Bill b : historyList.get(accountName)) {
+            totalPriceUser += b.getTotalPrice();
+        }
+        return totalPriceUser;
     }
 
     public void showAllHistoryUser() {
         historyList = getHistoryList();
-        for (Map.Entry<String, ArrayList<Bill>> entry: historyList.entrySet()) {
-            System.out.println(entry);
+        for (Map.Entry<String, ArrayList<Bill>> entry : historyList.entrySet()) {
+            System.out.println("Khách hàng: " + entry.getKey());
+            entry.getValue().forEach(Bill::display);
         }
     }
+
+    public double getTotalPriceAllUser() {
+        historyList = getHistoryList();
+        double totalPriceAll = 0;
+        for (ArrayList<Bill> bList : historyList.values()) {
+            for (Bill b : bList) {
+                totalPriceAll += b.getTotalPrice();
+            }
+        }
+        return totalPriceAll;
+    }
+
+    public double getTotalPriceByMonth(int month) {
+        historyList = getHistoryList();
+        double totalPriceForMonth = 0;
+        for (ArrayList<Bill> bList : historyList.values()) {
+            for (Bill b : bList) {
+                if (b.getPurchaseDate().getMonthValue()== month) {
+                    totalPriceForMonth += b.getTotalPrice();
+                }
+            }
+        }
+        return totalPriceForMonth;
+    }
+
+
     public void writerFileData() {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(new File(PATH_NAME_HISTORY_BILL)));

@@ -173,6 +173,8 @@ public class RunByUser {
         if(!userHistory.getHistoryList().get(Login.nameAccountUser).isEmpty()) {
             System.out.println("[\uD83D\uDCDD] Lịch sử mua hàng ");
             userHistory.showHistory(Login.nameAccountUser);
+            System.out.printf("%-20s%-12.0fVND\n","[\uD83D\uDCB0] Tổng số tiền bạn đã đốt vào đây là : ",userHistory.getTotalPriceByUser(Login.nameAccountUser));
+            System.out.println("[\uD83C\uDF81] Quý khách sẽ có được thẻ kim cương trong thời gian sớm thôi \uD83D\uDC97");
         } else {
             System.out.println("Bạn chưa mua hàng lần nào ở đây");
         }

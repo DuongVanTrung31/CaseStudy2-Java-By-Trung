@@ -1,6 +1,5 @@
 package _Model_Product;
 
-import _Account.AccountUser;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -37,13 +36,12 @@ public class Bill implements Serializable {
         return totalPrice;
     }
 
-    @Override
-    public String toString() {
-        return "Bill{" +
-                "userName='" + userName + '\n' +
-                ", product=" + product + '\n' +
-                ", totalPrice=" + totalPrice + '\t' +
-                ", purchaseDate=" + purchaseDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) +
-                '}';
+    public void display(){
+        System.out.println("╔====================================================================================================================================================╗");
+        System.out.println("\t Username:" + userName);
+        System.out.printf("║    %-5s ║    %-7s ║      %-9s ║                                    %-70s ║\n", "ID","Giá","Hãng","Tên sản phẩm");
+        product.forEach(System.out::println);
+        System.out.println("  Total Price " + totalPrice + '\t' + "  Purchase Date: " + purchaseDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+        System.out.println("╚====================================================================================================================================================╝");
     }
 }

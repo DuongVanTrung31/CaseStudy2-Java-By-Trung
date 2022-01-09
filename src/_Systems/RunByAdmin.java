@@ -29,7 +29,8 @@ public class RunByAdmin {
                 System.out.println("║>[3]. Xóa sản phẩm                                          ║");
                 System.out.println("║>[4]. Hiển thị sản phẩm                                     ║");
                 System.out.println("║>[5]. Thông tin khách hàng                                  ║");
-                System.out.println("║>[6]. Khôi phục dữ liệu                                     ║");
+                System.out.println("║>[6]. Doanh thu sản phẩm                                    ║");
+                System.out.println("║>[7]. Khôi phục dữ liệu                                     ║");
                 System.out.println("║>[0]. Đăng xuất                                             ║");
                 System.out.println("╚============================================================╝");
                 System.out.print("[\uD83D\uDC4B] Mời bạn nhập lựa chọn: ");
@@ -64,6 +65,9 @@ public class RunByAdmin {
                         managerUser();
                         break;
                     case 6:
+                        storeRevenue();
+                        break;
+                    case 7:
                         System.out.println("[\uD83D\uDEA7] Vui lòng đợi trong giây lát (Don't touch anything) [\uD83D\uDEA7]");
                         productFacade.backUpData();
                         break;
@@ -255,6 +259,44 @@ public class RunByAdmin {
             System.out.println("[❌] Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
             System.out.println("-----------------------------------------------------");
             managerUser();
+        }
+    }
+
+    public void storeRevenue() {
+        try {
+            System.out.println("╔==================================================╗");
+            System.out.println("║      ▂ ▃ ▅ ▆ █ DOANH THU CỬA HÀNG █ ▆ ▅ ▃ ▂      ║");
+            System.out.println("╠==================================================╣");
+            System.out.println("║>[1]. Doanh thu theo tháng                        ║");
+            System.out.println("║>[2]. Tổng toàn bộ doanh thu                      ║");
+            System.out.println("║>[0]. Quay lại                                    ║");
+            System.out.println("╚==================================================╝");
+            System.out.print("[\uD83D\uDC4B] Mời bạn nhập lựa chọn: ");
+            int choice = Integer.parseInt(scanner.nextLine());
+            switch (choice) {
+                case 1:
+                    System.out.print("[\uD83D\uDD0E] Nhập tháng: ");
+                    int month = Integer.parseInt(scanner.nextLine());
+                    if(month < 0 || month > 12) {
+                        System.out.println("[❌] Bạn đã nhập sai tháng! Vui lòng nhập lại! VD: Từ tháng 1 -> 12");
+                    } else {
+                        System.out.printf("%-20s%-2s%-4s%-10.0fVND\n","[\uD83D\uDCB0] Tổng doanh thu tháng ",month,"là: ",userHistory.getTotalPriceByMonth(month));
+                    }
+                    break;
+                case 2:
+                    System.out.printf("%-20s%-12.0fVND\n","[\uD83D\uDCB0] Tổng toàn bộ doanh thu là: ",userHistory.getTotalPriceAllUser());
+                    break;
+                case 0:
+                    System.out.println("[\uD83D\uDD14] Thoát");
+                    break;
+                default:
+                    System.out.println("[❌] Sai lựa chon");
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("[❌] Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
+            System.out.println("-----------------------------------------------------");
+            storeRevenue();
         }
     }
 }
