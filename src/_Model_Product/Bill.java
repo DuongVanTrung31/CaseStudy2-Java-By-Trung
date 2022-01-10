@@ -44,4 +44,14 @@ public class Bill implements Serializable {
         System.out.println("  Total Price " + totalPrice + '\t' + "  Purchase Date: " + purchaseDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
         System.out.println("╚====================================================================================================================================================╝");
     }
+
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "userName='" + userName + '\'' +
+                ", product=" + product +
+                ", totalPrice=" + totalPrice +
+                ", purchaseDate=" + purchaseDate +
+                '}';
+    }
 }

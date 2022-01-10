@@ -46,15 +46,18 @@ public class RunByUser {
                         search();
                         break;
                     case 3:
+                        admin.display();
                         addProductToCart();
                         break;
                     case 4:
+                        displayCart();
                         removeProductFromCart();
                         break;
                     case 5:
                         displayCart();
                         break;
                     case 6:
+                        displayCart();
                         payment();
                         break;
                     case 7:

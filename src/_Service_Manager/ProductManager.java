@@ -102,7 +102,7 @@ public class ProductManager implements IManager<Product>{
     }
 
 
-    public ArrayList<Product> findProductByBrand(String keyword){
+    public ArrayList<Product> findProductByKey(String keyword){
         ArrayList<Product> listBySearch = new ArrayList<>();
         for (Product p: productArrayList) {
             if(checkKey(keyword,p.getBrand())|| checkKey(keyword,p.getName())) {

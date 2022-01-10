@@ -113,7 +113,7 @@ public class ProductFacade {
             case 1:
                 System.out.print("[\uD83D\uDD0E] Nhập từ khóa tìm kiếm: ");
                 String brand = scanner.nextLine();
-                ArrayList<Product> listByBrand = productManager.findProductByBrand(brand);
+                ArrayList<Product> listByBrand = productManager.findProductByKey(brand);
                 if (listByBrand.isEmpty()) {
                     System.out.println("[❌] Không có sản phẩm nào có từ khóa trên");
                 } else {
